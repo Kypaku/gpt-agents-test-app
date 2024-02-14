@@ -1,29 +1,29 @@
 const request = require('supertest');
-const app = require('../app'); // Импортируйте ваше приложение здесь
+const app = require('../app'); // Import your application here
 
 let server;
 
 beforeAll((done) => {
-  server = app.listen(3003, done); // Запускаем сервер на альтернативном порту
+  server = app.listen(3003, done); // Start the server on an alternative port
 });
 
-describe('Тестирование маршрутов приложения', () => {
-  test('Корневой маршрут должен возвращать статус 200', async () => {
+describe('Testing application routes', () => {
+  test('Root route should return status 200', async () => {
     const response = await request(app).get('/');
     expect(response.statusCode).toBe(200);
   });
 
-  test('Маршрут /about должен возвращать статус 200', async () => {
+  test('Route /about should return status 200', async () => {
     const response = await request(app).get('/about');
     expect(response.statusCode).toBe(200);
   });
 
-  test('Маршрут /contact должен возвращать статус 200', async () => {
+  test('Route /contact should return status 200', async () => {
     const response = await request(app).get('/contact');
     expect(response.statusCode).toBe(200);
   });
 
-  test('API маршрут /api/data должен возвращать JSON', async () => {
+  test('API route /api/data should return JSON', async () => {
     const response = await request(app).get('/api/data');
     expect(response.statusCode).toBe(200);
     expect(response.type).toEqual('application/json');
@@ -31,5 +31,5 @@ describe('Тестирование маршрутов приложения', () 
 });
 
 afterAll((done) => {
-  server.close(done); // Закрываем сервер после тестов
+  server.close(done); // Close the server after tests
 });
